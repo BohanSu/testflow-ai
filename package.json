@@ -1,0 +1,65 @@
+{
+  "name": "testflow-ai",
+  "version": "0.1.0",
+  "description": "Multi-AI CLI Playwright testing and analysis platform - cross-provider test fixing, TUI dashboard, failure pattern analysis",
+  "type": "module",
+  "bin": {
+    "testflow": "./dist/core/cli.js"
+  },
+  "files": ["dist", "README.md", "LICENSE"],
+  "workspaces": [
+    "core",
+    "analyzer",
+    "test-playwright",
+    "ci"
+  ],
+  "scripts": {
+    "build": "npm run build:core && npm run build:analyzer && npm run build:ci && npm run build:test-playwright && npm run build:dashboard",
+    "build:core": "cd core && npm run build",
+    "build:analyzer": "cd analyzer && npm run build",
+    "build:ci": "cd ci && npm run build",
+    "build:test-playwright": "cd test-playwright && npm run build",
+    "build:dashboard": "cd dashboard && cargo build --release",
+    "test": "npm test",
+    "lint": "eslint . --ext .ts,.js,.tsx",
+    "format": "prettier --write \"core/**/*.ts\" \"test-playwright/**/*.ts\" \"analyzer/**/*.ts\"",
+    "dev": "concurrently \"npm run dev:core\" \"npm run dev:dashboard\"",
+    "dev:core": "cd core && npm run dev",
+    "dev:dashboard": "cd dashboard && cargo run --bin testflow",
+    "demo": "node dist/core/cli.js --help"
+  },
+  "keywords": [
+    "playwright",
+    "testing",
+    "ai",
+    "tui",
+    "e2e",
+    "automation",
+    "test-automation",
+    "claude-code",
+    "cursor",
+    "gemini",
+    "multi-agent"
+  ],
+  "author": "BohanSu",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^12.0.0",
+    "chalk": "^5.3.0",
+    "glob": "^10.3.10"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.3",
+    "tsup": "^8.0.1",
+    "vitest": "^1.2.2",
+    "eslint": "^8.56.0",
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "@typescript-eslint/parser": "^6.19.0",
+    "prettier": "^3.2.4",
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

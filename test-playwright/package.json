@@ -1,0 +1,35 @@
+{
+  "name": "@testflow/test-playwright",
+  "version": "0.1.0",
+  "description": "TestFlow AI Playwright integration - extended MCP tools from playwright-autopilot",
+  "type": "module",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --clean --sourcemap",
+    "test": "vitest run",
+    "lint": "eslint src --ext .ts",
+    "dev": "tsup src/index.ts --format esm --watch"
+  },
+  "keywords": ["testflow", "playwright", "e2e", "testing", "automation", "mcp"],
+  "author": "BohanSu",
+  "license": "MIT",
+  "dependencies": {
+    "glob": "^10.3.10"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.3",
+    "tsup": "^8.0.1",
+    "vitest": "^1.2.2",
+    "eslint": "^8.56.0",
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "@typescript-eslint/parser": "^6.19.0",
+    "prettier": "^3.2.4"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
