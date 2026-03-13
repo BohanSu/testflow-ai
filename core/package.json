@@ -11,10 +11,10 @@
     ".": "./dist/index.js"
   },
   "scripts": {
-    "build": "tsup src/index.ts --format esm --clean --sourcemap",
+    "build": "tsup src/index.ts src/cli.ts --format esm --clean --sourcemap",
     "test": "vitest run",
     "lint": "eslint src --ext .ts",
-    "dev": "tsup src/index.ts --format esm --watch"
+    "dev": "tsup src/index.ts src/cli.ts --format esm --watch"
   },
   "keywords": ["testflow", "ai", "cli", "playwright", "multi-agent", "testing"],
   "author": "BohanSu",

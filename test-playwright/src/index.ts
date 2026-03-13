@@ -91,7 +91,9 @@ export async function runTestsAcrossProviders(options: MultiProviderRunOptions):
       }
     }
 
-    results.set(provider, providerResults);
+    if (providerResults.length > 0) {
+      results.set(provider, providerResults);
+    }
   }
 
   return results;

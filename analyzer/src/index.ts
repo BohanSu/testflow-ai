@@ -83,13 +83,15 @@ export function categorizeFailure(errorMessage: string, stackTrace?: string): 'a
   const lowerError = errorMessage.toLowerCase();
 
   const appBugPatterns = [
-    'element not found',
     'timeout',
     'connection refused',
     '400 bad request',
     '500 internal server error',
     'authentication failed',
     'unauthorized',
+    'network error',
+    'network request failed',
+    'fetch failed',
   ];
 
   if (appBugPatterns.some((pattern) => lowerError.includes(pattern))) {
@@ -103,6 +105,7 @@ export function categorizeFailure(errorMessage: string, stackTrace?: string): 'a
     'async test timeout',
     'element click intercepted',
     'selector not found',
+    'element with selector',
   ];
 
   if (testIssuePatterns.some((pattern) => lowerError.includes(pattern))) {
@@ -123,7 +126,7 @@ export function categorizeFailure(errorMessage: string, stackTrace?: string): 'a
 function normalizeErrorMessage(message: string): string {
   return message
     .replace(/\d{4}-\d{2}-\d{2}/g, 'YYYY-MM-DD')
-    .replace(/[a-f0-9]{32,}/gi, '[HASH]')
+    .replace(/[a-f0-9]{20,}/gi, '[HASH]')
     .replace(/\/home\/[^\/]+/g, '~/')
     .replace(/\/Users\/[^\/]+/g, '~/')
     .replace(/C:\\Users\\[^\\]+\\/g, '~/');
@@ -142,6 +145,6 @@ function determineSeverity(failure: TestFailure): 'low' | 'medium' | 'high' {
     'unknown': 'medium',
   };
 
-  const category = categoryPriorities[failure.category.toLowerCase()] || 'medium';
+  const category = categoryPriorities[failure.category?.toLowerCase() || 'unknown'] || 'medium';
   return category;
 }

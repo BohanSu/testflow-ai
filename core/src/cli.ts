@@ -136,10 +136,6 @@ const statsCmd = new Command('stats')
     console.log(chalk.dim('Analysis complete. Check reports in test-reports/ directory.\n'));
   });
 
-program.command('run [test-path]', 'Run tests with multiple AI providers')
-  .action(async (testPath, options) => {
-    await run(options);
-  });
 program.addCommand(triageCmd);
 program.addCommand(statsCmd);
 
